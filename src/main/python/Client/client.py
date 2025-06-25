@@ -18,7 +18,7 @@ model = ChatGoogleGenerativeAI(
 
 server_params = StdioServerParameters(
     command="python",
-    args=["pr_reviewer.py"],
+    args=["src/main/python/Server/pr_reviewer.py"],
 )
 
 async def run_agent(query):

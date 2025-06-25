@@ -1,11 +1,11 @@
 import sys
-import os
 import traceback
 from typing import Any, Dict
 from mcp.server.fastmcp import FastMCP
-from github_integration import fetch_pr_changes, post_github_pr_comment
+
 from dotenv import load_dotenv
 
+from github_integration import fetch_pr_changes, post_github_pr_comment
 from review_formatter import format_review
 
 
