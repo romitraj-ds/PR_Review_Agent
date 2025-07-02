@@ -14,7 +14,7 @@ class PRAnalyzer:
     def __init__(self):
         # Load environment variables
         load_dotenv()
-        print(f"Environment variables loaded, {os.getenv('GOOGLE_API_KEY')}, {os.getenv('GITHUB_TOKEN')}" )
+        print(f"Environment variables loaded")
 
         # Initialize MCP Server
         self.mcp = FastMCP("github_pr_analysis")
