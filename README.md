@@ -1,7 +1,5 @@
 ## Enviroment Setup
-Update the following envs with real keys
-- GITHUB_TOKEN=<GITHUB_TOKEN>
-- GOOGLE_API_KEY=<GOOGLE_API_KEY>
+Update the env variables with real keys
 
 ## Duild a docker image
 ```bash
