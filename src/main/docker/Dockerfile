@@ -15,7 +15,7 @@ COPY src/ /app/src/
 COPY .env /app/.env
 
 # Expose port 8080 to allow external access to the application
-EXPOSE 8080
+EXPOSE 8000
 
 # Set the default command to run the client application
 CMD ["uvicorn", "src.main.python.Client.client:app", "--host", "0.0.0.0", "--port", "8000"]
