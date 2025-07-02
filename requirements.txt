@@ -1,7 +1,0 @@
-requests>=2.31.0
-python-dotenv>=1.0.0
-mcp[cli]>=1.4.0
-langchain_mcp_adapters
-langchain-google-genai
-langgraph
-google-generativeai
