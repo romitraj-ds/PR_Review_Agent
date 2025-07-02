@@ -1,19 +1,24 @@
 import os
-import asyncio
+from fastapi import FastAPI, Request
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from langchain_mcp_adapters.tools import load_mcp_tools
 from langgraph.prebuilt import create_react_agent
-from langchain_google_genai import ChatGoogleGenerativeAI  # Use LangChain's wrapper
+from langchain_google_genai import ChatGoogleGenerativeAI
+import uvicorn
 
 load_dotenv()
+
+app = FastAPI()
+
 GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
 
-# Create the model using LangChain's wrapper
 model = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
-    temperature=0.2
+    temperature=0.2,
+    google_api_key=GOOGLE_API_KEY,
 )
 
 server_params = StdioServerParameters(
@@ -21,28 +26,32 @@ server_params = StdioServerParameters(
     args=["src/main/python/Server/pr_reviewer.py"],
 )
 
-async def run_agent(query):
+class AskRequest(BaseModel):
+    question: str
+
+def convert_to_dict(obj):
+    if hasattr(obj, "__dict__"):
+        return dict(obj)
+    elif isinstance(obj, dict):
+        return {key: convert_to_dict(val) for key, val in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_to_dict(item) for item in obj]
+    else:
+        return obj
+
+@app.post("/review")
+async def ask_question(req: AskRequest):
     async with stdio_client(server_params) as (read, write):
         async with ClientSession(read, write) as session:
             await session.initialize()
-
-            # Get tools
             tools = await load_mcp_tools(session)
-
-            # Create and run the agent
             agent = create_react_agent(model, tools)
             agent_response = await agent.ainvoke({
-                "messages": [{"role": "user", "content": query}]
+                "messages": [{"role": "user", "content": req.question}]
             })
-            return agent_response
+            result_dict = convert_to_dict(agent_response)
+            return {"response": result_dict['messages'][-1]}
 
-
+# For dev run
 if __name__ == "__main__":
-    print("Welcome to the AI assistant. Type 'exit' to quit.")
-    while True:
-        user_input = input("\nEnter your question: ")
-        if user_input.lower() == 'exit':
-            break
-        result = asyncio.run(run_agent(user_input))
-        print("\nAI Response:")
-        print(result)
+    uvicorn.run("src.main.python.Client.client:app", host="0.0.0.0", port=8000, reload=False)

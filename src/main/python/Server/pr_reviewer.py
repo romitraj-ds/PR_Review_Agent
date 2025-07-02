@@ -1,3 +1,4 @@
+import os
 import sys
 import traceback
 from typing import Any, Dict
@@ -13,6 +14,7 @@ class PRAnalyzer:
     def __init__(self):
         # Load environment variables
         load_dotenv()
+        print(f"Environment variables loaded")
 
         # Initialize MCP Server
         self.mcp = FastMCP("github_pr_analysis")
@@ -20,6 +22,7 @@ class PRAnalyzer:
 
         # Register MCP tools
         self._register_tools()
+
 
     def _register_tools(self):
         """Register MCP tools for PR analysis."""

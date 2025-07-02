@@ -24,7 +24,11 @@ def fetch_pr_changes(repo_owner: str, repo_name: str, pr_number: int) -> dict:
     # Fetch PR details
     pr_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/pulls/{pr_number}"
     files_url = f"{pr_url}/files"
-    headers = {'Authorization': f'token {GITHUB_TOKEN}'}
+    headers = {
+        'Authorization': f'token {GITHUB_TOKEN}',
+        "User-Agent": "pr-review-agent",
+        "Accept": "application/vnd.github.v3+json"
+    }
 
     try:
         # Get PR metadata

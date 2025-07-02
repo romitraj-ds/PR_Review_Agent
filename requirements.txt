@@ -5,3 +5,5 @@ langchain_mcp_adapters
 langchain-google-genai
 langgraph
 google-generativeai
+fastapi
+uvicorn
