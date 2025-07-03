@@ -1,4 +1,4 @@
-# PR Reviewer Agent
+# PR Review Agent
 
 ## Introduction
 PR Reviewer is an AI-powered Agent that automatically analyzes and reviews GitHub Pull Requests. 
