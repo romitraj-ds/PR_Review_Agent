@@ -1,4 +1,4 @@
-# PR Review Agent
+# PR Reviewer Agent
 
 ## Introduction
 PR Reviewer is an AI-powered Agent that automatically analyzes and reviews GitHub Pull Requests. 
@@ -19,6 +19,21 @@ The PR Reviewer works by:
 3. Generating comprehensive review comments with suggestions and best practices
 4. Posting the review directly to the GitHub PR
 5. Providing the same review in the response for local reference
+
+## Technology Stack
+
+### Core Frameworks
+- **FastAPI**: High-performance web framework for building APIs
+- **Uvicorn**: ASGI server for running the FastAPI application
+- **Docker**: For containerization and deployment
+
+### AI & Language Processing
+- **MCP (Multi-Chain Programming)**: Framework for orchestrating AI workflows through standardized communication
+- **LangChain**: Composition framework for LLM applications
+  - langchain_mcp_adapters: Adapters for MCP integration
+  - langchain-google-genai: Google AI model integrations
+- **LangGraph**: Flow control for complex LLM reasoning chains
+- **Google Generative AI**: Provides the underlying AI models (Gemini)
 
 
 ## Enviroment Setup
