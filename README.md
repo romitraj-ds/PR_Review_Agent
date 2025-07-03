@@ -1,3 +1,26 @@
+# PR Reviewer Agent
+
+## Introduction
+PR Reviewer is an AI-powered Agent that automatically analyzes and reviews GitHub Pull Requests. 
+It leverages LLM to provide insightful feedback on code changes, helping teams 
+maintain code quality and accelerate the review process.
+
+## Features
+- **Automated Code Reviews**: AI-driven analysis of GitHub Pull Requests
+- **GitHub Integration**: Posts review comments directly to your Pull Requests
+- **Natural Language Interface**: Simple question-based interaction through CLI or API
+- **Containerized Deployment**: Easy setup and consistent environment using Docker
+
+
+## Functionality
+The PR Reviewer works by:
+1. Accepting a GitHub Pull Request URL as input
+2. Fetching and analyzing the code changes using AI models
+3. Generating comprehensive review comments with suggestions and best practices
+4. Posting the review directly to the GitHub PR
+5. Providing the same review in the response for local reference
+
+
 ## Enviroment Setup
 Update the env variables with real keys
 
