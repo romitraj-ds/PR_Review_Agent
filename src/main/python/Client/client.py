@@ -21,9 +21,12 @@ model = ChatGoogleGenerativeAI(
     google_api_key=GOOGLE_API_KEY,
 )
 
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
+server_script_path = os.path.join(project_root, "src", "main", "python", "Server", "pr_reviewer.py")
+
 server_params = StdioServerParameters(
     command="python",
-    args=["src/main/python/Server/pr_reviewer.py"],
+    args=[server_script_path],
 )
 
 class AskRequest(BaseModel):
@@ -54,4 +57,4 @@ async def ask_question(req: AskRequest):
 
 # For dev run
 if __name__ == "__main__":
-    uvicorn.run("src.main.python.Client.client:app", host="0.0.0.0", port=8000, reload=False)
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)
