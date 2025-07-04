@@ -42,7 +42,7 @@ Update the env variables with real keys
 
 ## 🐳 Duild a docker image
 ```bash
-docker build -t pr-reviewer:0.0.1 .
+docker build -t pr-reviewer:0.0.1 -f src/main/docker/Dockerfile .
 ```
 
 ## 🚀 Run the docker as service
